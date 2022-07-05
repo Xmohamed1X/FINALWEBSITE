@@ -218,6 +218,12 @@ footer .social-icons {
 	text-decoration: none;
 }
 
+#WOM {
+	display: block !important;
+
+}
+
+
 .social-icons i {
 	display: inline-flex;
 	align-items: center;

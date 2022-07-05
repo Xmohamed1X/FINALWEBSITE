@@ -11,7 +11,7 @@ import styles from '../styles/Home.module.css'
 import Header from "../components/Header"
 
 
-const supportedChains = 4;
+const supportedChains = 1;
 
 export default function Home() {
 
@@ -26,7 +26,7 @@ export default function Home() {
     
     
 
-    const contractAddress = "0x28e7D1A449D5De9178CdB580f55075169ccEbE5C"
+    const contractAddress = "0xE122573e6E5Ac5759eBB10e6BDB9C9D0b3c129dA"
 
  
   
@@ -46,19 +46,19 @@ export default function Home() {
     const tree = new MerkleTree(leaves,keccak256,{ sort: true });
     const leaf = keccak256(account);
     const proof = tree.getHexProof(leaf);
-
+    console.log(proof)
     
     const {
-    runContractFunction: preSalemint,
+    runContractFunction: preSaleMint,
     data: enterTxResponse, isLoading
     } = useWeb3Contract({
         abi: abi,
         contractAddress: contractAddress,
-        functionName: "preSalemint",
+        functionName: "preSaleMint",
         msgValue: priceWL,
         params: {
-            _proof: proof,
-            _quantity: quantity
+          _proof: proof,
+          _quantity: quantity
         },
     })
     
@@ -99,7 +99,7 @@ export default function Home() {
           setpriceb(5000000000000000*quantity) 
           
         }
-        setlive(false)
+        setlive(true)
     }, [live,isWeb3Enabled,quantity,isLoading,isFetching])
 
     const handleNewNotification = () => {
@@ -107,7 +107,7 @@ export default function Home() {
             type: "success",
             message: "Congrats!",
             title: "Transaction Complete!",
-            position: "topR",
+            position: "bottomL",
             icon: "eth",
         })
     }
@@ -116,7 +116,7 @@ export default function Home() {
           type: "error",
           message: "Error",
           title: "mint is not success!",
-          position: "topR",
+          position: "bottomR",
           icon: "eth",
       })
   }
@@ -137,7 +137,7 @@ export default function Home() {
         if (WL){
           
         try {
-            await preSalemint({
+            await preSaleMint({
             onSuccess: handleSuccess,
             onError: handleError,
             })
@@ -219,7 +219,7 @@ export default function Home() {
       {/* Header */}
       <div className="alert text-center" id="WOM">
       <button className="btn btn-success" type="button" disabled>
-        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        <span className="spinner-border spinner-border-sm me-2 " role="status" aria-hidden="true"></span>
         Working for mint !
       </button>
       </div>
